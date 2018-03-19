@@ -25,8 +25,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    api 'com.github.AndyAls:QPopuWindow:v1.0.0'
+//    api 'com.github.AndyAls:QPopuWindow:v1.0.1'
     //    compile 'com.github.pinguo-zhouwei:CustomPopwindow:2.1.1'
-//    implementation project(':Qpopuwindow')
+    implementation project(':Qpopuwindow')
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 }

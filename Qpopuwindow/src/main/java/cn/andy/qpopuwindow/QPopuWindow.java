@@ -123,9 +123,7 @@ import java.util.List;
 
         private Builder() {
             config = new Config();
-
         }
-
 
         /**
          * 绑定anchorView <b>必须调用</b>
@@ -198,6 +196,7 @@ import java.util.List;
         public Builder setIndicatorViewSize(int width, int height) {
             config.indicatorViewWidth = width;
             config.indicatorViewHeight = height;
+            config.mIndicatorView=getDefaultIndicatorView(mContext,config.normalBackgroundColor,config.indicatorViewWidth,config.indicatorViewHeight);
             return builder;
         }
 
@@ -214,6 +213,7 @@ import java.util.List;
          */
         public Builder setNormalBackgroundColor(@ColorInt int color) {
             config.normalBackgroundColor = color;
+            config.mIndicatorView=getDefaultIndicatorView(mContext,config.normalBackgroundColor,config.indicatorViewWidth,config.indicatorViewHeight);
             return builder;
         }
 

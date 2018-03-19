@@ -30,21 +30,16 @@ public class ListViewActivity extends AppCompatActivity{
            @Override
            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-               QPopuWindow.getInstance(ListViewActivity.this).builder//-->通过单例模式获取builder对象
-                       .bindView(view,position)//------------------------>绑定view,此方法必须调用,view必须是长按的那个view,position为view在listview的位置
-                       .setPopupItemList(new String[]{"复制","粘贴","转发","更多...."})//->设置pop的数据源,此方法必须调用
-                       .setPointers(rawX,rawY)//-------------------------->设置手指在屏幕触摸的绝对位置坐标,此方法必须调用
-                       .setOnPopuListItemClickListener(new QPopuWindow.OnPopuListItemClickListener() {//pop item的点击事件监听回调
-                           /**
-                            * @param anchorView 为pop的绑定view
-                            * @param anchorViewPosition  pop绑定view在ListView的position
-                            * @param position  pop点击item的position 第一个位置索引为0
-                            */
+               QPopuWindow.getInstance(ListViewActivity.this).builder
+                       .bindView(view,position)
+                       .setPopupItemList(new String[]{"复制","粘贴","转发","更多...."})
+                       .setPointers(rawX,rawY)
+                       .setOnPopuListItemClickListener(new QPopuWindow.OnPopuListItemClickListener() {
                            @Override
                            public void onPopuListItemClick(View anchorView, int anchorViewPosition, int position) {
                                Toast.makeText(ListViewActivity.this,anchorViewPosition+"---->"+position,Toast.LENGTH_SHORT).show();
                            }
-                       }).show();//--------------------------------------->pop显示,此方法必须调用
+                       }).show();
                return true;
            }
        });
