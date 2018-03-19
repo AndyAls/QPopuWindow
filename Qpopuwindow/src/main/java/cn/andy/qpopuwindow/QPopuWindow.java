@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.opengl.Visibility;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -42,16 +43,16 @@ import java.util.List;
 
     private static final int DEFAULT_NORMAL_TEXT_COLOR = Color.WHITE;
     private static final int DEFAULT_PRESSED_TEXT_COLOR = Color.WHITE;
-    private static final int DEFAULT_TEXT_SIZE_DP = 12;
-    private static final int DEFAULT_TEXT_PADDING_LEFT_DP = 16;
-    private static final int DEFAULT_TEXT_PADDING_TOP_DP = 6;
-    private static final int DEFAULT_TEXT_PADDING_RIGHT_DP = 16;
-    private static final int DEFAULT_TEXT_PADDING_BOTTOM_DP = 6;
+    private static final int DEFAULT_TEXT_SIZE = 12;
+    private static final int DEFAULT_TEXT_PADDING_LEFT = 16;
+    private static final int DEFAULT_TEXT_PADDING_TOP = 6;
+    private static final int DEFAULT_TEXT_PADDING_RIGHT = 16;
+    private static final int DEFAULT_TEXT_PADDING_BOTTOM = 6;
     private static final int DEFAULT_NORMAL_BACKGROUND_COLOR = 0xCC000000;
     private static final int DEFAULT_PRESSED_BACKGROUND_COLOR = 0xE7777777;
-    private static final int DEFAULT_BACKGROUND_RADIUS_DP = 5;
+    private static final int DEFAULT_BACKGROUND_RADIUS = 5;
     private static final int DEFAULT_DIVIDER_COLOR = 0x9AFFFFFF;
-    private static final int DEFAULT_DIVIDER_WIDTH_DP = 1;
+    private static final int DEFAULT_DIVIDER_WIDTH = 1;
     private static final int DEFAULT_TEXT_DRAWABLE_SIZE = 24;
 
     private Context mContext;
@@ -83,16 +84,16 @@ import java.util.List;
 
         private int normalTextColor = DEFAULT_NORMAL_TEXT_COLOR;
         private int pressedTextColor = DEFAULT_PRESSED_TEXT_COLOR;
-        private int textSize = DEFAULT_TEXT_SIZE_DP;
-        private int textPaddingLeft = dp2px(DEFAULT_TEXT_PADDING_LEFT_DP);
-        private int textPaddingTop = dp2px(DEFAULT_TEXT_PADDING_TOP_DP);
-        private int textPaddingRight = dp2px(DEFAULT_TEXT_PADDING_RIGHT_DP);
-        private int textPaddingBottom = dp2px(DEFAULT_TEXT_PADDING_BOTTOM_DP);
+        private int textSize = DEFAULT_TEXT_SIZE;
+        private int textPaddingLeft = dp2px(DEFAULT_TEXT_PADDING_LEFT);
+        private int textPaddingTop = dp2px(DEFAULT_TEXT_PADDING_TOP);
+        private int textPaddingRight = dp2px(DEFAULT_TEXT_PADDING_RIGHT);
+        private int textPaddingBottom = dp2px(DEFAULT_TEXT_PADDING_BOTTOM);
         private int normalBackgroundColor = DEFAULT_NORMAL_BACKGROUND_COLOR;
         private int pressedBackgroundColor = DEFAULT_PRESSED_BACKGROUND_COLOR;
-        private int radius = dp2px(DEFAULT_BACKGROUND_RADIUS_DP);
+        private int radius = dp2px(DEFAULT_BACKGROUND_RADIUS);
         private int dividerColor = DEFAULT_DIVIDER_COLOR;
-        private int dividerWidth = dp2px(DEFAULT_DIVIDER_WIDTH_DP);
+        private int dividerWidth = dp2px(DEFAULT_DIVIDER_WIDTH);
         private int textDrawableSize = dp2px(DEFAULT_TEXT_DRAWABLE_SIZE);
 
         private float indicatorViewWidth = dp2px(18);
@@ -109,6 +110,7 @@ import java.util.List;
         private int mIndicatorWidth;
         private int mIndicatorHeight;
         private List<Drawable> textDrawableList;
+        private boolean visibility=true;
 
         private Config() {
             mIndicatorView = getDefaultIndicatorView(mContext, normalBackgroundColor, indicatorViewWidth, indicatorViewHeight);
@@ -175,7 +177,7 @@ import java.util.List;
         }
 
         /**
-         * 设置item'字体大小
+         * 设置item字体大小
          */
         public Builder setTextSize(int size) {
             config.textSize = size;
@@ -261,7 +263,16 @@ import java.util.List;
             return builder;
         }
 
+        /**
+         * 设置item 分割线是否可见
+         * @param visibility  true 可见, false 不可见 默认是true
+         * @return this
+         */
+        public Builder setDividerVisibility(boolean visibility){
 
+            config.visibility=visibility;
+            return builder;
+        }
         /**
          * 弹窗显示
          */
@@ -275,8 +286,8 @@ import java.util.List;
 
             if (config.mPopupWindow == null) {
 
-                refreshBackgroundOrRadiusStateList(config);
-                refreshTextColorStateList(config);
+                setPopupListBgAndRadius(config);
+                setTextColorStateList(config);
 
                 LinearLayout contentView = createContentView();
                 LinearLayout popupListContainer = createContainerView();
@@ -413,14 +424,17 @@ import java.util.List;
                     textView.setBackground(getCenterItemBackground(config));
                 }
                 popupListContainer.addView(textView);
-                if (config.mPopupItemList.size() > 1 && i != config.mPopupItemList.size() - 1) {
-                    View divider = new View(mContext);
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(config.dividerWidth, LinearLayout.LayoutParams.MATCH_PARENT);
-                    layoutParams.gravity = Gravity.CENTER;
-                    divider.setLayoutParams(layoutParams);
-                    divider.setBackgroundColor(config.dividerColor);
-                    popupListContainer.addView(divider);
+                if (config.visibility){
+                    if (config.mPopupItemList.size() > 1 && i != config.mPopupItemList.size() - 1) {
+                        View divider = new View(mContext);
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(config.dividerWidth, LinearLayout.LayoutParams.MATCH_PARENT);
+                        layoutParams.gravity = Gravity.CENTER;
+                        divider.setLayoutParams(layoutParams);
+                        divider.setBackgroundColor(config.dividerColor);
+                        popupListContainer.addView(divider);
+                    }
                 }
+
             }
         }
 
@@ -498,7 +512,7 @@ import java.util.List;
         return outMetrics.widthPixels;
     }
 
-    private void refreshTextColorStateList(Config config) {
+    private void setTextColorStateList(Config config) {
         int[][] states = new int[2][];
         states[0] = new int[]{android.R.attr.state_pressed};
         states[1] = new int[]{};
@@ -509,7 +523,7 @@ import java.util.List;
     /**
      * 绘制背景和圆角
      */
-    private void refreshBackgroundOrRadiusStateList(Config config) {
+    private void setPopupListBgAndRadius(Config config) {
         // left
         GradientDrawable leftItemPressedDrawable = new GradientDrawable();
         leftItemPressedDrawable.setColor(config.pressedBackgroundColor);
