@@ -68,7 +68,7 @@ listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
         });
 ```
 
-# [点击查看源码详解和更多使用介绍](http://blog.csdn.net/andy_l1/article/details/79610003)
+# [点击查看源码详解和更多使用介绍](http://blog.csdn.net/andy_l1/article/details/79612216)
 
 # 有缘看到此库的大兄弟们,欢迎给个Star,欢迎Issues,谢谢
 
