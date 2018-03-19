@@ -37,11 +37,7 @@ allprojects {
 
 ```java
 dependencies {
-<<<<<<< HEAD
 	        compile 'com.github.AndyAls:QPopuWindow:v1.0.1'
-=======
-	       compile 'com.github.AndyAls:QPopuWindow:v1.0.1'
->>>>>>> b9ddea767b5030f9631892ba585a997a3beba042
 	}
 ```
 
