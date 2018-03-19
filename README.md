@@ -1,5 +1,5 @@
 
-#仿qq聊天消息长按弹窗
+# 仿qq聊天消息长按弹窗
 
 
 > 如图1是qq聊天消息的长按的弹窗,最主要的特点是有一个指针,指针的位置是手指触摸手机屏幕的位置,而且弹窗会根据手指的触摸屏幕的不同位置显示在不同的位置,图2是demo中的效果图
@@ -18,7 +18,7 @@
 
 > QPopuWindow继承自PopuWindow,支持所有的View及属性自定义扩展,通过builder链式调用来设置不同的属性和显示,使用简单,代码简洁.
 
-##如何使用
+## 如何使用
 
 - **step**
 
@@ -67,9 +67,9 @@ listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
         });
 ```
 
-#[点击查看源码详解和更多使用介绍](http://blog.csdn.net/andy_l1/article/details/79610003)
+# [点击查看源码详解和更多使用介绍](http://blog.csdn.net/andy_l1/article/details/79610003)
 
-#Thanks
+# Thanks
 [PopupList](https://github.com/shangmingchao/PopupList)
 
 
