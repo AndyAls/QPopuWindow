@@ -36,7 +36,7 @@ allprojects {
 
 ```java
 dependencies {
-	        compile 'com.github.AndyAls:QPopuWindow:v1.0.0'
+	       compile 'com.github.AndyAls:QPopuWindow:v1.0.1'
 	}
 ```
 
