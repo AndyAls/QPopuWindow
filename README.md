@@ -12,11 +12,8 @@
 
 **图2**
 
-![0101.gif](./img/001.gif "s")
+![0101.gif](./img/001.gif "s") ![0101.gif](./img/002.gif "s") ![0101.gif](./img/003.gif "s")
 
-![0101.gif](./img/002.gif "s")
-
-![0101.gif](./img/003.gif "s")
 
 # QPopuWindow
 
@@ -40,7 +37,11 @@ allprojects {
 
 ```java
 dependencies {
+<<<<<<< HEAD
+	        compile 'com.github.AndyAls:QPopuWindow:v1.0.1'
+=======
 	       compile 'com.github.AndyAls:QPopuWindow:v1.0.1'
+>>>>>>> b9ddea767b5030f9631892ba585a997a3beba042
 	}
 ```
 
